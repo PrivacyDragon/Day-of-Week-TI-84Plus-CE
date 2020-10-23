@@ -1,0 +1,533 @@
+:DCS
+"7700077077077000707070700777000070707770007000007070707000700000770070700070000000000000000000007770777000000000707070000000000070707770000000007770700000000000000000000000000070707707707007007070700700707000777077077077000077707007007070007070770770700700"
+Lbl B
+ClrHome
+{4,3}->dim([H])
+If [H](2,1)!=1 and [H](2,1)!=2 and [H](2,1)!=3
+Then
+	1->[H](2,1)
+End
+If [H](1,3)=0
+Then
+	1582->[H](1,3)
+	10->[H](1,2)
+	4->[H](1,1)
+End
+Output(1,1,"CALCULATE ANY GIVEN DATE!")
+Output(2,1,"--------------------------")
+Output(3,1,"Press:")
+Output(4,1,"{2nd} for configuration")
+Output(5,1,"{enter} to start")
+Output(6,1,"{clear} to exit")
+Output(7,1,"NOTE:")
+Output(8,1,"The year 0 doesn't exist")
+Output(9,4,"(C)Privacy Dragon")
+0->S
+Repeat S=21 or S=105 or S=45 or S=22
+	getKey->S
+	If S=22
+	Then
+		ClrHome
+		Output(1,3,"VERSION INFORMATION")
+		Output(2,1,"--------------------------")
+		Output(3,1,"You have version: 1.2.2Bbeta")
+		Output(4,1,"released: --")
+		getDate->|LDATE
+		List>matr(|LDATE,[D])
+		If [D](1,1)>=2022
+		Output(7,1,"You can check if there is a new version.")
+		Pause 
+		Goto B
+		End
+	End
+	If S=21
+	Goto C
+	If S=105
+	Goto S
+	If S=45
+	Then
+		ClrHome
+		Stop
+	End
+End
+
+Lbl C
+ClrHome
+Lbl CE
+">"->Str9
+" "->Str8
+" "->Str7
+Output(1,6,"CONFIGURATIONS")
+Output(2,1,"--------------------------")
+Output(3,3,"Calendar switch")
+Output(3,1,Str9)
+Output(4,3,"Date format")
+Output(4,1,Str8)
+Output(5,3,"QUIT")
+Output(5,1,Str7)
+0->S
+Repeat S=34 or S=105 or S=22 or S=25
+	getKey->S
+	If S=22
+	Then
+		ClrHome
+		Output(1,3,"VERSION INFORMATION")
+		Output(2,1,"--------------------------")
+		Output(3,1,"You have version: 1.2.1B")
+		Output(4,1,"released: 22 October 2020")
+		getDate->|LDATE
+		List>matr(|LDATE,[D])
+		If [H](2,3)>=2022
+		Then
+			Output(7,1,"You can check if there is a new version!")
+			Pause 
+			ClrHome
+			Goto CE
+		End
+	End
+	If S=105
+	Then
+		ClrHome
+		Disp "Currently the date is set"
+		Output(2,1,"on:")
+		If [H](2,1)=1
+		Then
+			Output(4,9,[H](1,1))
+			Output(4,6,[H](1,2))
+			Output(4,1,[H](1,3))
+		End
+		If [H](2,1)=2
+		Then
+			Output(4,8,[H](1,3))
+			Output(4,4,[H](1,1))
+			Output(4,1,[H](1,2))
+		End
+		If [H](2,1)=3
+		Then
+			Output(4,8,[H](1,3))
+			Output(4,4,[H](1,2))
+			Output(4,1,[H](1,1))
+		End
+		Output(6,1,"Press:")
+		Output(7,1,"{ENTER} to continue")
+		Output(8,1,"{CLEAR} to go back")
+		0->[H](3,3)
+		Repeat [H](3,3)=105 or [H](3,3)=45
+			getKey->[H](3,3)
+			If [H](3,3)=45
+			Then
+				ClrHome
+				Goto CE
+			End
+			If [H](3,3)=105
+			Then
+				ClrHome
+				Output(1,1,"SET THE DATE THE CALENDAR SWITCHED FROM JULIAN TO    GREGORIAN IN YOUR COUNTRY")
+				Pause 
+				ClrHome
+				Disp "Please input the"
+				Output(2,1,"last julian date")
+				Pause 
+				If [H](2,1)=1
+				Goto Z
+				If [H](2,1)=2
+				Goto Y
+				If [H](2,1)=3
+				Goto X
+			End
+		End
+	End
+	If S=34
+	Goto CT
+	If S=25
+	Goto CD
+End
+
+Lbl CT
+" "->Str9
+">"->Str8
+" "->Str7
+Output(1,6,"CONFIGURATIONS")
+Output(2,1,"--------------------------")
+Output(3,3,"Calendar switch")
+Output(3,1,Str9)
+Output(4,3,"Date format")
+Output(4,1,Str8)
+Output(5,3,"QUIT")
+Output(5,1,Str7)
+0->S
+Repeat S=34 or S=105 or S=25
+	getKey->S
+	If S=105
+	Then
+		ClrHome
+		Disp "The current setting is:"
+		If [H](2,1)=1
+		Output(3,1,"YYYY/MM/DD")
+		If [H](2,1)=2
+		Output(3,1,"MM/DD/YYYY")
+		If [H](2,1)=3
+		Output(3,1,"DD/MM/YYYY")
+		Output(5,1,"Press:")
+		Output(6,1,"{ENTER} to continue")
+		Output(7,1,"{CLEAR} to go back")
+		0->[H](3,3)
+		Repeat [H](3,3)=105 or [H](3,3)=45
+			getKey->[H](3,3)
+			If [H](3,3)=45
+			Then
+				ClrHome
+				Goto CE
+			End
+			If [H](3,3)=105
+			Then
+				ClrHome
+				Output(1,4,"Date format")
+				Output(2,1,"--------------------------")
+				Output(3,1,"WHAT DATE FORMAT DO YOU WANT TO USE?")
+				Output(5,1,"1) YYYY/MM/DD"
+				Output(6,1,"2) MM/DD/YYYY"
+				Output(7,1,"3) DD/MM/YYYY"
+				0->N
+				Repeat N=92 or N=93 or N=94
+					getKey->N
+					If N=92
+					Then
+						ClrHome
+						1->[H](2,1)
+						Disp "FORMAT SET!"
+						Wait 0.5
+						Goto C
+					End
+					If N=93
+					Then
+						ClrHome
+						2->[H](2,1)
+						Disp "FORMAT SET!"
+						Wait 0.5
+						Goto C
+					End
+					If N=94
+					Then
+						ClrHome
+						3->[H](2,1)
+						Disp "FORMAT SET!"
+						Wait 0.5
+						Goto C
+					End
+				End
+			End
+		End
+	End
+	If S=25
+	Goto CE
+	If S=34
+	Goto CD
+End
+	
+Lbl CD
+" "->Str9
+" "->Str8
+">"->Str7
+Output(1,6,"CONFIGURATIONS")
+Output(2,1,"--------------------------")
+Output(3,3,"Calendar switch")
+Output(3,1,Str9)
+Output(4,3,"Date format")
+Output(4,1,Str8)
+Output(5,3,"QUIT")
+Output(5,1,Str7)
+0->N
+Repeat N=105 or N=25 or N=34
+	getKey->N
+	If N=105
+	Goto B
+	If N=25
+	Goto CT
+	If N=34
+	Goto CE
+End
+
+Lbl X
+ClrHome
+Input "DAY:",I
+I->[H](1,1)
+If [H](2,1)=1
+Then
+	Disp "DATE SET!"
+	Wait 0.5
+	Goto C
+End
+If [H](2,1)=2
+Goto Z
+If [H](2,1)=3
+Goto Y
+
+Lbl Y
+ClrHome
+Input "MONTH:",I
+I->[H](1,2)
+If [H](2,1)=1
+Goto X
+If [H](2,1)=2
+Goto X
+If [H](2,1)=3
+Goto Z
+
+Lbl Z
+ClrHome
+Input "YEAR:",I
+I->[H](1,3)
+If [H](1,3)=0
+Then
+	ClrHome
+	Disp "ERROR:"
+	Disp "The year 0 doesn't exist"
+	Pause 
+	Goto Z
+End
+If [H](2,1)=1
+Then
+Goto Y
+End
+If [H](2,1)=2
+Then
+	Disp "DATE SET!"
+	Wait 0.5
+	Goto C
+End
+If [H](2,1)=3
+Then
+	Disp "DATE SET!"
+	Wait 0.5
+	Goto C
+End
+
+
+Lbl S
+If [H](2,1)=1
+Then
+	ClrHome
+	Input "YEAR:",Y
+	ClrHome
+	Input "MONTH:",M
+	ClrHome
+	Input "DAY:",D
+	Goto F
+End
+If [H](2,1)=2
+Then
+	ClrHome
+	Input "MONTH:",M
+	ClrHome
+	Input "DAY:",D
+	ClrHome
+	Input "YEAR:",Y
+	Goto F
+End
+If [H](2,1)=3
+Then
+	ClrHome
+	Input "DAY:",D
+	ClrHome
+	Input "MONTH:",M
+	ClrHome
+	Input "YEAR:",Y
+	Goto F
+End
+
+Lbl F
+ClrHome
+If Y=0
+Then
+	Disp "ERROR:"
+	Disp "The year 0 doesn't exist"
+	Pause 
+	Goto S
+End
+If D>31 or D<=0
+Then
+	Disp "ERROR:"
+	Disp "INVALID DAY"
+	Pause 
+	Goto S
+End
+If M>12 or M<=0
+Then
+	Disp "ERROR:"
+	Disp "INVALID MONTH"
+	Pause 
+	Goto S
+End
+If ((M=4 or M=6 or M=9 or M=11) and D=31) or (D=29 and M=2 and (remainder(Y,4)!=0 or (remainder(Y,4)=0 and remainder(Y,100)=0 and remainder(Y,400)!=0)) or Y=0 or (M=2 and (D=30 or D=31)))
+Then
+	Disp "ERROR:"
+	Disp "INVALID DATE"
+	Pause 
+	Goto S
+End
+(int([H](1,3)/100))-int(([H](1,3)/400))-2+1->[H](2,2)
+If [H](1,2)=1 or [H](1,2)=3 or [H](1,2)=5 or [H](1,2)=7 or [H](1,2)=8 or [H](1,2)=10 or [H](1,2)=12
+Then
+	32->[H](3,1)
+	31->[H](3,2)
+End
+If [H](1,2)=4 or [H](1,2)=6 or [H](1,2)=9 or [H](1,2)=11
+Then
+	31->[H](3,1)
+	30->[H](3,2)
+End
+If remainder([H](1,3),4)!=0 and [H](1,2)=2
+Then
+	29->[H](3,1)
+	28->[H](3,2)
+End
+If Y=[H](1,3) and M=[H](1,2) and D>[H](1,1) and [H](1,1)+[H](2,2)<[H](3,1)
+Then
+	If D>[H](1,1) and D<[H](1,1)+[H](2,2)
+	Then
+		Output(3,1,"ERROR:")
+		Output(4,1,"NONEXISTANT DATE DUE TO"
+		Output(5,1,"CALENDAR CHANGE")
+		Pause 
+		Goto S
+	End
+End
+If [H](1,1)+[H](2,2)>[H](3,2)
+Then
+	[H](1,2)+1->[H](4,2)
+	[H](1,1)+[H](2,2)-[H](3,2)->[H](4,1)
+	If [H](1,2)=12
+	Then
+		[H](1,2)-11->[H](4,2)
+		[H](1,3)+1->[H](4,3)
+	End
+	If (Y=[H](1,3) and M=[H](4,2) and D<[H](4,1)) or (Y=[H](1,3) and M=[H](1,2) and D>[H](1,1)) or (Y=[H](4,3) and M=[H](4,2) and D<[H](4,1))
+	Then
+		Output(3,1,"ERROR:")
+		Output(4,1,"NONEXISTANT DATE DUE TO")
+		Output(5,1,"CALENDAR CHANGE")
+		Pause 
+		Goto S
+	End
+End
+If [H](1,3)=1700 and [H](1,2)=2 and [H](1,1)=18
+Then
+	If Y=1700 and M=2 and D>18
+	Then
+		Output(3,1,"ERROR:")
+		Output(4,1,"NONEXISTANT DATE DUE TO"
+		Output(5,1,"CALENDAR CHANGE")
+		Pause 
+		Goto S
+	End
+End
+M->K
+Y->L
+If M=1 or M=2
+Then
+	M+12->M
+	Y-1->Y
+End
+
+If L>[H](1,3) or L=[H](1,3) and K>[H](1,2)
+Then
+	int((13*(M+1))/5)->A
+	D+A+Y->B
+	int(Y/4)->C
+	int(Y/100)->E
+	int(Y/400)->F
+	B+C-E+F->H
+	remainder(H,7)->W
+End
+
+If L=[H](1,3) and K=[H](1,2)
+Then
+	If D>[H](1,1)
+	Then
+		int((13*(M+1))/5)->A
+		D+A+Y->B
+		int(Y/4)->C
+		int(Y/100)->E
+		int(Y/400)->F
+		B+C-E+F->H
+		remainder(H,7)->W
+	End
+	If D<[H](1,1) or D=[H](1,1)
+	Then
+		int((13*(M+1))/5)->A
+		D+A+Y->B
+		int(Y/4)->C
+		B+C+5->F
+		remainder(F,7)->W
+	End
+End
+
+
+If L<[H](1,3)
+Then
+	int((13*(M+1))/5)->A
+	D+A+Y->B
+	int(Y/4)->C
+	B+C+5->F
+	remainder(F,7)->W
+End
+
+If W=0
+"SATURDAY"->Str9
+If W=1
+"SUNDAY"->Str9
+If W=2
+"MONDAY"->Str9
+If W=3
+"TUESDAY"->Str9
+If W=4
+"WEDNESDAY"->Str9
+If W=5
+"THURSDAY"->Str9
+If W=6
+"FRIDAY"->Str9
+If [H](2,1)=1
+Then
+	Output(2,7,L)
+	Output(2,13,K)
+	Output(2,16,D)
+End
+If [H](2,1)=2
+Then
+	Output(2,8,K)
+	Output(2,11,D)
+	Output(2,14,L)
+End
+If [H](2,1)=3
+Then
+	Output(2,8,D)
+	Output(2,11,K)
+	Output(2,14,L)
+End
+getDate->|LDATE
+List>matr(|LDATE,[D])
+If [D](1,1)<Y
+Then
+	Output(4,8,"WILL BE ON A:")
+	Output(9,1,"IF THERE ARE STILL PEOPLE")
+	Output(10,1,"IN THAT YEAR...")
+	Output(5,9,Str9)
+	Pause 
+	Goto B
+End
+If [D](1,1)>Y
+Then
+	Output(4,8,"WAS ON A:")
+	Output(5,9,Str9)
+	Pause 
+	Goto B
+End
+If [D](1,1)=Y
+Then
+	Output(4,8,"IS ON A:")
+	Output(5,9,Str9)
+	Pause 
+	Goto B
+End
+
