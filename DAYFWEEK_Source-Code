@@ -1,0 +1,773 @@
+[i]DAYFWEEK
+[i]"7700077077077000707070700777000070707770007000007070707000700000770070700070000000000000000000007770777000000000707070000000000070707770000000007770700000000000000000000000000070707707707007007070700700707000777077077077000077707007007070007070770770700700"
+[i]"Calculate the day of the week, for any date!"
+det(1)
+Lbl BEGIN
+ClrHome
+CloseAll
+OpenVar("DCHANGE","r",21)->SLOT
+GetChar(SLOT)->DCHANGE
+CloseAll
+If DCHANGE<1 or DCHANGE>31
+	OpenVar("DCHANGE","w",21)->IETS
+	PutChar(4,IETS)
+	CloseAll
+	4->DCHANGE
+End
+OpenVar("MCHANGE","r",21)->SLOT
+GetChar(SLOT)->MCHANGE
+CloseAll
+If MCHANGE<1 or MCHANGE>12
+	OpenVar("MCHANGE","w",21)->IETS
+	PutChar(10,IETS)
+	CloseAll
+	10->MCHANGE
+End
+OpenVar("YCHANGE","r",21)->SLOT
+	Read(^^oYCHANGE,3,1,SLOT)
+	CloseAll
+If YCHANGE<1
+	Write(1582,3,1,SLOT)
+	CloseAll
+	1582->YCHANGE
+End
+OpenVar("YMD","r",21)->SLOT
+GetChar(SLOT)->YMD
+CloseAll
+If YMD!=1 and YMD!=2 and YMD!=3
+	OpenVar("YMD","r",21)->IETS
+	PutChar(1,IETS)
+	CloseAll
+	1->YMD
+End
+CloseAll
+Output(0,0,"CALCULATE ANY GIVEN DATE!")
+Output(1,0,"--------------------------")
+Output(2,0,"Press:")
+Output(3,0,"{2nd} for configuration")
+Output(4,0,"{enter} to start")
+Output(5,0,"{clear} to exit")
+Output(6,0,"NOTE:")
+Output(7,0,"The year 0 doesn't exist")
+Output(9,4,"(C)Privacy Dragon")
+0->SLEUTEL
+Repeat SLEUTEL=9 or SLEUTEL=54 or SLEUTEL=15 or SLEUTEL=55
+	getKey->SLEUTEL
+	If SLEUTEL=55
+		ClrHome
+		Output(0,3,"VERSION INFORMATION")
+		Output(1,0,"--------------------------")
+		Output(2,0,"You have version: 1.2.03")
+		Output(3,0,"Released: --")
+		Output(4,0,"This is a Beta version")
+		Output(6,0,"If 2022 already started,")
+		Output(7,0,"You can check if there is a new version.")
+		0->SLOT
+		Repeat SLOT=9
+			getKey->SLOT
+			If SLOT=9
+				Goto BEGIN
+			End
+		End
+	End
+	If SLEUTEL=15
+		ClrHome
+		Return
+	End
+	If SLEUTEL=9
+		Goto START
+	End
+	If SLEUTEL=54
+		Goto CONFIG
+	End
+End
+
+Lbl CONFIG
+ClrHome
+Lbl CONEEN
+">"->Str9
+" "->Str8
+" "->Str7
+Output(0,6,"CONFIGURATIONS")
+Output(1,0,"||||||||||||||||||||||||||")
+Output(2,3,"Calendar switch")
+Output(2,0,Str9)
+Output(3,3,"Date format")
+Output(3,0,Str8)
+Output(4,3,"QUIT")
+Output(4,0,Str7)
+0->LOCK
+Repeat LOCK=9 or LOCK=1 or LOCK=55 or LOCK=4
+	getKey->LOCK
+	If LOCK=55
+		ClrHome
+		Output(0,3,"VERSION INFORMATION")
+		Output(1,0,"--------------------------")
+		Output(2,0,"You have version: 1.2.1")
+		Output(3,0,"Released: 22 October 2020")
+		Output(6,0,"If 2022 already started,")
+		Output(7,0,"You can check if there is a new version!")
+		0->SLOT
+		Repeat SLOT=9
+			getKey->SLOT
+			If SLOT=9
+				Goto BEGIN
+			End
+		End
+	End
+	If LOCK=9
+		ClrHome
+		Disp "Currently the date is set on:"
+		If YMD=1
+			Output(3,9,DCHANGE)
+			Output(3,6,MCHANGE)
+			Output(3,0,YCHANGE)
+		End
+		If YMD=2
+			Output(3,8,YCHANGE)
+			Output(3,3,DCHANGE)
+			Output(3,0,MCHANGE)
+		End
+		If YMD=3
+			Output(3,8,YCHANGE)
+			Output(3,3,MCHANGE)
+			Output(3,0,DCHANGE)
+		End
+		Output(4,0,"Press:")
+		Output(5,0,"{ENTER} to continue")
+		Output(6,0,"{CLEAR} to go back")
+		0->JANEE
+		Repeat JANEE=9 or JANEE=15
+			getKey->JANEE
+			If JANEE=15
+				ClrHome
+				Goto CONFIG
+			End
+			If JANEE=9
+				ClrHome
+				Disp "SET THE DATE THE CALENDAR SWITCHED FROM JULIAN TO GREGORIAN IN YOUR COUNTRY"
+				Pause 
+				ClrHome
+				Disp "PLEASE INPUT THE LAST"
+				Output(1,0,"JULIAN DATE")
+				Pause 
+				If YMD=1
+					Goto YEAR
+				End
+				If YMD=2
+					Goto MONTH
+				End
+				If YMD=3
+					Goto DAY
+				End
+			End
+		End
+	End
+	If LOCK=1
+		Goto CONTWEE
+	End
+	If LOCK=4
+		Goto CONDRIE
+	End
+End
+
+Lbl CONTWEE
+" "->Str9
+">"->Str8
+" "->Str7
+Output(0,6,"CONFIGURATIONS")
+Output(1,0,"||||||||||||||||||||||||||")
+Output(2,3,"Calendar switch")
+Output(2,0,Str9)
+Output(3,3,"Date format")
+Output(3,0,Str8)
+Output(4,3,"QUIT")
+Output(4,0,Str7)
+Repeat SLOT=1 or SLOT=9 or SLOT=4
+	getKey->SLOT
+	If SLOT=4
+		Goto CONEEN
+	End
+	If SLOT=9
+		ClrHome
+		Disp "The current setting is:"
+		If YMD=1
+			Output(3,1,"YYYY/MM/DD")
+		End
+		If YMD=2
+			Output(3,1,"MM/DD/YYYY")
+		End
+		If YMD=3
+			Output(3,1,"DD/MM/YYYY")
+		End
+		Output(4,0,"Press:")
+		Output(5,0,"{ENTER} to continue")
+		Output(6,0,"{CLEAR} to go back")
+		0->JA
+		Repeat JA=9 or JA=15
+			getKey->JA
+			If JA=15
+				ClrHome
+				Goto CONFIG
+			End
+			If JA=9
+				ClrHome
+				Output(0,4,"Date format")
+				Output(1,0,"||||||||||||||||||||||||||")
+				Output(2,0,"WHAT DATE FORMAT DO YOU WANT TO USE?")
+				Output(4,0,"1) YYYY/MM/DD"
+				Output(5,0,"2) MM/DD/YYYY"
+				Output(6,0,"3) DD/MM/YYYY"
+				Repeat KEUZE=34 or KEUZE=26 or KEUZE=18
+					getKey->KEUZE
+					If KEUZE=34
+						1->YMD
+						CloseAll
+						OpenVar("YMD","w",21)->BLA
+						PutChar(1,BLA)
+						CloseAll
+						ClrHome
+						Disp "FORMAT SET!"
+						Pause 500
+						Goto CONFIG
+					End
+					If KEUZE=26
+						2->YMD
+						CloseAll
+						OpenVar("YMD","w",21)->BLA
+						PutChar(2,BLA)
+						CloseAll
+						ClrHome
+						Disp "FORMAT SET!"
+						Pause 500
+						Goto CONFIG
+					End
+					If KEUZE=18
+						3->YMD
+						CloseAll
+						OpenVar("YMD","w",21)->BLA
+						PutChar(3,BLA)
+						CloseAll
+						ClrHome
+						Disp "FORMAT SET!"
+						Pause 500
+						Goto CONFIG
+					End
+				End
+			End
+		End
+	End
+	If SLOT=1
+		Goto CONDRIE
+	End
+End
+
+Lbl CONDRIE
+" "->Str9
+" "->Str8
+">"->Str7
+Output(0,6,"CONFIGURATIONS")
+Output(1,0,"||||||||||||||||||||||||||")
+Output(2,3,"Calendar switch")
+Output(2,0,Str9)
+Output(3,3,"Date format")
+Output(3,0,Str8)
+Output(4,3,"QUIT")
+Output(4,0,Str7)
+0->IETS
+Repeat IETS=9 or IETS=1 or IETS=4
+	getKey->IETS
+	If IETS=9
+		Goto BEGIN
+	End
+	If IETS=1
+		Goto CONEEN
+	End
+	If IETS=4
+		Goto CONTWEE
+	End
+End
+
+
+Lbl DAY
+ClrHome
+Disp "INPUT DAY:"
+Call INPUT
+If INPUT<1 or INPUT>31
+	Output(3,0,"ERROR:")
+	Output(4,0,"INVALID DAY")
+	Pause 
+	Goto DAY
+End
+INPUT->DCHANGE
+CloseAll
+OpenVar("DCHANGE","w",21)->BLA
+PutChar(DCHANGE,BLA)
+CloseAll
+If YMD=1
+Output(3,0,"DATE SET!")
+Pause 
+Goto CONFIG
+End
+If YMD=2
+	Goto YEAR
+End
+If YMD=3
+	Goto MONTH
+End
+
+Lbl MONTH
+ClrHome
+Disp "INPUT MONTH:"
+Call INPUT
+If INPUT<1 or INPUT>12
+	Output(3,0,"ERROR:")
+	Output(4,0,"INVALID DAY")
+	Pause 
+	Goto MONTH
+End
+INPUT->MCHANGE
+CloseAll
+OpenVar("MCHANGE","w",21)->BLA
+PutChar(MCHANGE,BLA)
+CloseAll
+If YMD=1
+	Goto DAY
+End
+If YMD=2
+	Goto DAY
+End
+If YMD=3
+	Goto YEAR
+End
+
+Lbl YEAR
+ClrHome
+Disp "INPUT YEAR:"
+Call INPUT
+INPUT->YCHANGE
+CloseAll
+OpenVar("YCHANGE","w",21)->BLA
+Write(^^oYCHANGE,3,1,BLA)
+CloseAll
+If YMD=1
+	Goto MONTH
+End
+If YMD=2
+	Output(3,0,"DATE SET!")
+	Pause 
+	Goto CONFIG
+End
+If YMD=3
+	Output(3,0,"DATE SET!")
+	Pause 
+	Goto CONFIG
+End
+
+Lbl START
+If YMD=1
+	Goto YEARN
+End
+If YMD=2
+	Goto MONTHN
+End
+If YMD=3
+	Goto DAYN
+End
+
+Lbl DAYN
+ClrHome
+Disp "INPUT DAY:"
+Call INPUT
+If INPUT<1 or INPUT>31
+	Output(3,0,"ERROR:")
+	Output(4,0,"INVALID DAY")
+	Pause 
+	Goto DAYN
+End
+INPUT->DAY
+If YMD=1
+	Goto FORMULA
+End
+If YMD=2
+	Goto YEARN
+End
+If YMD=3
+	Goto MONTHN
+End
+
+Lbl MONTHN
+ClrHome
+Disp "INPUT MONTH:"
+Call INPUT
+If INPUT<1 or INPUT>31
+	Output(3,0,"ERROR:")
+	Output(4,0,"INVALID MONTH")
+	Pause 
+	Goto MONTHN
+End
+INPUT->MONTH
+If YMD=1 or YMD=2
+	Goto DAYN
+End
+If YMD=3
+	Goto YEARN
+End
+
+Lbl YEARN
+ClrHome
+Disp "INPUT YEAR:"
+Call INPUT
+If INPUT=0
+	Output(3,0,"ERROR:")
+	Output(4,0,"THE YEAR 0 DOESN'T EXIST")
+	Goto YEARN
+End
+INPUT->YEAR
+If YMD=1
+	Goto MONTHN
+End
+If YMD=2 or YMD=3
+	Goto FORMULA
+End
+
+Lbl FORMULA
+(YCHANGE/100)-(YCHANGE/400)-2+1->VERSCHIL
+If MCHANGE=1 or MCHANGE=3 or MCHANGE=5 or MCHANGE=7 or MCHANGE=8 or MCHANGE=10 or MCHANGE=12
+	32->A
+	31->B
+End
+If MCHANGE=4 or MCHANGE=6 or MCHANGE=9 or MCHANGE=11
+	31->A
+	30->B
+End
+If remainder(YCHANGE,4)!=0 and MCHANGE=2
+	29->A
+	28->B
+End
+If YEAR=YCHANGE and MONTH=MCHANGE and DAY>DCHANGE and DCHANGE+VERSCHIL<A
+	If DAY>DCHANGE and DAY<DCHANGE+VERSCHIL
+		Output(3,0,"ERROR:")
+		Output(4,0,"NONEXISTANT DATE DUE TO"
+		Output(5,0,"CALENDAR CHANGE")
+		Pause 
+		Goto START
+	End
+End
+If DCHANGE+VERSCHIL>B
+	MCHANGE+1->MONTHA
+	DCHANGE+VERSCHIL-B->DAYA
+	If MCHANGE=12
+		MCHANGE-11->MONTHA
+		YCHANGE+1->YEARA
+	End
+	If (YEAR=YCHANGE and MONTH=MONTHA and DAY<DAYA) or (YEAR=YCHANGE and MONTH=MCHANGE and DAY>DCHANGE) or (YEAR=YEARA and MONTH=MONTHA and DAY<DAYA)
+		Output(3,0,"ERROR:")
+		Output(4,0,"NONEXISTANT DATE DUE TO")
+		Output(5,0,"CALENDAR CHANGE")
+		Pause 
+		Goto START
+	End
+End
+
+If (DAY=31 and (MONTH=4 or MONTH=6 or MONTH=9 or MONTH=11)) or (MONTH=2 and (DAY=29 and (remainder(YEAR,4)!=0 or (YEAR>YCHANGE and remainder(YEAR,4)=0 and remainder(YEAR,100)=0 and remainder(YEAR,400)!=0) or (MONTH=2 and DAY=30))
+	Output(3,0,"ERROR:")
+	Output(4,0,"INVALID DATE")
+	Pause 
+	Goto START
+End
+YEAR->YEER
+MONTH->MOONTH
+If MONTH=1 or MONTH=2
+	MONTH+12->MONTH
+	YEAR-1->YEAR
+End
+
+If YEER>YCHANGE or YEER=YCHANGE and MOONTH>MCHANGE
+	(13*(MONTH+1))/5->PARTA
+	DAY+PARTA+YEAR->PARTAB
+	YEAR/4->PARTB
+	YEAR/100->PARTC
+	YEAR/400->PARTD
+	PARTAB+PARTB-PARTC+PARTD->PARTE
+	remainder(PARTE,7)->WEEKDAG
+End
+
+If YEER=YCHANGE and MOONTH=MCHANGE
+	If DAY>DCHANGE
+		(13*(MONTH+1))/5->PARTA
+		DAY+PARTA+YEAR->PARTAB
+		YEAR/4->PARTB
+		YEAR/100->PARTC
+		YEAR/400->PARTD
+		PARTAB+PARTB-PARTC+PARTD->PARTE
+		remainder(PARTE,7)->WEEKDAG
+	End
+	If DAY<DCHANGE or DAY=DCHANGE
+		(13*(MONTH+1))/5->PARTA
+		DAY+PARTA+YEAR->PARTAB
+		YEAR/4->PARTB
+		PARTAB+PARTB+5->PARTD
+		remainder(PARTD,7)->WEEKDAG
+	End
+End
+
+If YEER<YCHANGE
+	(13*(MONTH+1))/5->PARTA
+	DAY+PARTA+YEAR->PARTAB
+	YEAR/4->PARTB
+	PARTAB+PARTB+5->PARTD
+	remainder(PARTD,7)->WEEKDAG
+End
+ClrHome
+If WEEKDAG=0
+	"SATURDAY"->Str9
+End
+If WEEKDAG=1
+	"SUNDAY"->Str9
+End
+If WEEKDAG=2
+	"MONDAY"->Str9
+End
+If WEEKDAG=3
+	"TUESDAY"->Str9
+End
+If WEEKDAG=4
+	"WEDNESDAY"->Str9
+End
+If WEEKDAG=5
+	"THURSDAY"->Str9
+End
+If WEEKDAG=6
+	"FRIDAY"->Str9
+End
+If YMD=3
+	Disp DAY,MOONTH,YEER
+End
+If YMD=2
+	Disp MOONTH,DAY,YEER
+End
+If YMD=1
+	Disp YEER,MOONTH,DAY
+End
+If YEER<2021 and YEER!=2020
+	Output(2,8,"WAS ON A:")
+	Output(3,9,Str9)
+	Pause 
+	Goto BEGIN
+End
+If YEER>2021
+	Output(2,8,"WILL BE ON A:")
+	Output(3,9,Str9
+	Output(8,0,"IF THERE ARE STILL PEOPLE")
+	Output(9,0,"IN THAT YEAR")
+	Pause 
+	Goto BEGIN
+End
+If YEER=2020 or YEER=2021
+	Output(2,8,"IS ON A:")
+	Output(3,9,Str9)
+	Pause 
+	Goto BEGIN
+End
+
+Lbl INPUT
+98381->CHAR
+98381->CHARR
+98381->CHARRR
+98381->CHARRRR
+98381->CHARRRRR
+Repeat CHAR!=98381
+	getKey->KEY
+	If KEY=33
+		0->CHAR
+	End
+	If KEY=34
+		10000->CHAR
+	End
+	If KEY=26
+		20000->CHAR
+	End
+	If KEY=18
+		30000->CHAR
+	End
+	If KEY=35
+		40000->CHAR
+	End
+	If KEY=27
+		50000->CHAR
+	End
+	If KEY=19
+		60000->CHAR
+	End
+	If KEY=36
+		70000->CHAR
+	End
+	If KEY=28
+		80000->CHAR
+	End
+	If KEY=20
+		90000->CHAR
+	End
+End
+Output(1,2,CHAR/10000)
+Repeat CHARR!=98381
+	getKey->KEYY
+	If KEYY=33
+		0->CHARR
+	End
+	If KEYY=34
+		1000->CHARR
+	End
+	If KEYY=26
+		2000->CHARR
+	End
+	If KEYY=18
+		3000->CHARR
+	End
+	If KEYY=35
+		4000->CHARR
+	End
+	If KEYY=27
+		5000->CHARR
+	End
+	If KEYY=19
+		6000->CHARR
+	End
+	If KEYY=36
+		7000->CHARR
+	End
+	If KEYY=28
+		8000->CHARR
+	End
+	If KEYY=20
+		9000->CHARR
+	End
+	If KEYY=9
+		CHAR/10000->INPUT
+		Return
+	End
+End
+Output(1,3,(CHAR+CHARR)/1000)
+Repeat CHARRR!=98381
+	getKey->KEYYY
+	If KEYYY=33
+		0->CHARRR
+	End
+	If KEYYY=34
+		100->CHARRR
+	End
+	If KEYYY=26
+		200->CHARRR
+	End
+	If KEYYY=18
+		300->CHARRR
+	End
+	If KEYYY=35
+		400->CHARRR
+	End
+	If KEYYY=27
+		500->CHARRR
+	End
+	If KEYYY=19
+		600->CHARRR
+	End
+	If KEYYY=36
+		700->CHARRR
+	End
+	If KEYYY=28
+		800->CHARRR
+	End
+	If KEYYY=20
+		900->CHARRR
+	End
+	If KEYYY=9
+		(CHAR+CHARR)/1000->INPUT
+		Return
+	End
+End
+Output(1,4,(CHAR+CHARR+CHARRR)/100)
+Repeat CHARRRR!=98381
+	getKey->KEYYYY
+	If KEYYYY=33
+		0->CHARRRR
+	End
+	If KEYYYY=34
+		10->CHARRRR
+	End
+	If KEYYYY=26
+		20->CHARRRR
+	End
+	If KEYYYY=18
+		30->CHARRRR
+	End
+	If KEYYYY=35
+		40->CHARRRR
+	End
+	If KEYYYY=27
+		50->CHARRRR
+	End
+	If KEYYYY=19
+		60->CHARRRR
+	End
+	If KEYYYY=36
+		70->CHARRRR
+	End
+	If KEYYYY=28
+		80->CHARRRR
+	End
+	If KEYYYY=20
+		90->CHARRRR
+	End
+	If KEYYYY=9
+		(CHAR+CHARR+CHARRR)/100->INPUT
+		Return
+	End
+End
+Output(1,5,(CHAR+CHARR+CHARRR+CHARRRR)/10)
+Repeat CHARRRRR!=98381
+	getKey->KEYYYYY
+	If KEYYYYY=33
+		0->CHARRRRR
+	End
+	If KEYYYYY=34
+		1->CHARRRRR
+	End
+	If KEYYYYY=26
+		2->CHARRRRR
+	End
+	If KEYYYYY=18
+		3->CHARRRRR
+	End
+	If KEYYYYY=35
+		4->CHARRRRR
+	End
+	If KEYYYYY=27
+		5->CHARRRRR
+	End
+	If KEYYYYY=19
+		6->CHARRRRR
+	End
+	If KEYYYYY=36
+		7->CHARRRRR
+	End
+	If KEYYYYY=28
+		8->CHARRRRR
+	End
+	If KEYYYYY=20
+		9->CHARRRRR
+	End
+	If KEYYYYY=9
+		(CHAR+CHARR+CHARRR+CHARRRR)/10->INPUT
+		Return
+	End
+End
+Output(1,6,CHAR+CHARR+CHARRR+CHARRRR+CHARRRRR)
+Repeat KAY=9
+	getKey->KAY
+	If KAY=9
+		CHAR+CHARR+CHARRR+CHARRRR+CHARRRRR->INPUT
+		Return
+	End
+End
+Return
