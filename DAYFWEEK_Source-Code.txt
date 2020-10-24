@@ -103,8 +103,9 @@ Repeat LOCK=9 or LOCK=1 or LOCK=55 or LOCK=4
 		ClrHome
 		Output(0,3,"VERSION INFORMATION")
 		Output(1,0,"--------------------------")
-		Output(2,0,"You have version: 1.2.1")
-		Output(3,0,"Released: 22 October 2020")
+		Output(2,0,"You have version: 1.2.03")
+		Output(3,0,"Released: --")
+		Output(4,0,"This is a Beta version")
 		Output(6,0,"If 2022 already started,")
 		Output(7,0,"You can check if there is a new version!")
 		0->SLOT
