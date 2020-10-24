@@ -57,9 +57,8 @@ Repeat SLEUTEL=9 or SLEUTEL=54 or SLEUTEL=15 or SLEUTEL=55
 		ClrHome
 		Output(0,3,"VERSION INFORMATION")
 		Output(1,0,"--------------------------")
-		Output(2,0,"You have version: 1.2.03")
-		Output(3,0,"Released: --")
-		Output(4,0,"This is a Beta version")
+		Output(2,0,"You have version: 1.2.1")
+		Output(3,0,"Released: 22 October 2020")
 		Output(6,0,"If 2022 already started,")
 		Output(7,0,"You can check if there is a new version.")
 		0->SLOT
@@ -470,7 +469,7 @@ If DCHANGE+VERSCHIL>B
 	End
 End
 
-If (DAY=31 and (MONTH=4 or MONTH=6 or MONTH=9 or MONTH=11)) or (MONTH=2 and (DAY=29 and (remainder(YEAR,4)!=0 or (YEAR>YCHANGE and remainder(YEAR,4)=0 and remainder(YEAR,100)=0 and remainder(YEAR,400)!=0) or (MONTH=2 and DAY=30))
+If (DAY=31 and (MONTH=4 or MONTH=6 or MONTH=9 or MONTH=11)) or (MONTH=2 and (DAY=29 and remainder(YEAR,4)!=0) or (MONTH=2 and DAY=30)
 	Output(3,0,"ERROR:")
 	Output(4,0,"INVALID DATE")
 	Pause 
