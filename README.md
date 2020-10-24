@@ -14,24 +14,24 @@ You can download the program via 'releases'
 
 #### How to send the program to your calculator?
 You can easily send the program to your calculator using TiLP or TI-connect CE.
-Once you've sent it to your calculator there are two possible options to run the program, for the ICE version:
--If the OS of your calculator is 5.5 or higher, then you should run the program via Cesium, or use asmhook.
--If the OS of your calculator is 5.4 or below, you can just run the program via the [prgm] menu.
-For the TI-BASIC version:
--Just run the program via the [prgm] menu
+Once you've sent it to your calculator there are two possible options to run the program, for the ICE version:<br>
+-If the OS of your calculator is 5.5 or higher, then you should run the program via Cesium, or use asmhook.<br>
+-If the OS of your calculator is 5.4 or below, you can just run the program via the [prgm] menu.<br>
+For the TI-BASIC version:<br>
+-Just run the program via the [prgm] menu<br>
 
 #### How do I use this program?
-Once you open the program you can press:
--[2nd] to go to the settings
--[enter] to calculate the day of week
--[clear] to exit
+Once you open the program you can press:<br>
+-[2nd] to go to the settings<br>
+-[enter] to calculate the day of week<br>
+-[clear] to exit<br>
 -[mode] to see what version you have
 
 ###### What are the settings?
-There are two different settings:
--On what date your country switched to the Gregorian calendar
--If you want the dates in YYYY-MM-DD, MM-DD-YYYY or DD-MM-YYYY
-These settings are all stored in appvars.
+There are two different settings:<br>
+-On what date your country switched to the Gregorian calendar<br>
+-If you want the dates in YYYY-MM-DD, MM-DD-YYYY or DD-MM-YYYY<br>
+These settings are all stored in appvars if you use the ICE version, and they're stored in matrix [H] if you use the TI-BASIC version.
 
 Once you press [enter] in the first screen, you'll be asked the year, month and day in the order you selected in the settings.
 The default setting is that you see the notation: YYYY/MM/DD.
@@ -45,13 +45,13 @@ This is are two formulas that can be used to calculate the day of week in the Gr
 If you want to know more, I reccomend reading the wikipedia page about it: https://en.wikipedia.org/wiki/Zeller%27s_congruence
 
 
-The default setting for the date notation is: YYYY/MM/DD.
+The default setting for the date notation is: YYYY/MM/DD.<br>
 The default setting for the calendar switch is: 4 October 1582.
 
 #### IMPORTANT NOTES: 
--If you live in Sweden, the dates that the Swedish calendar was used (from 1700 till 1753) will NOT be correct.
--If your country used another calendar than the Julian before changing to Gregorian, you should input in the settings the first gregorian date
--If your country used another calendar than the Julian before changing to Gregorian, you can ONLY calculate dates from 14 days after the calendar change and later.
+-If you live in Sweden, the dates that the Swedish calendar was used (from 1700 till 1753) will NOT be correct.<br>
+-If your country used another calendar than the Julian before changing to Gregorian, you should input in the settings the first gregorian date<br>
+-If your country used another calendar than the Julian before changing to Gregorian, you can ONLY calculate dates from 14 days after the calendar change and later.<br>
 -If you live in Turkey, you should input as calendar change 1 Januari 1926, since that's when they also took the current year counting.
 
 -------------------------------------------------------------------------------
