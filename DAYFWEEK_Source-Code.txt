@@ -401,12 +401,6 @@ Lbl MONTHN
 ClrHome
 Disp "INPUT MONTH:"
 Call INPUT
-If INPUT<1 or INPUT>31
-	Output(3,0,"ERROR:")
-	Output(4,0,"INVALID MONTH")
-	Pause 
-	Goto MONTHN
-End
 INPUT->MONTH
 If YMD=1 or YMD=2
 	Goto DAYN
@@ -471,7 +465,7 @@ If DCHANGE+VERSCHIL>B
 	End
 End
 
-If (DAY=31 and (MONTH=4 or MONTH=6 or MONTH=9 or MONTH=11)) or (MONTH=2 and (DAY=29 and (remainder(YEAR,4)!=0 or (YEAR>YCHANGE and remainder(YEAR,4)=0 and remainder(YEAR,100)=0 and remainder(YEAR,400)!=0) or (MONTH=2 and DAY=30))
+If (DAY=31 and (MONTH=4 or MONTH=6 or MONTH=9 or MONTH=11)) or (MONTH=2 and (DAY=29 and (remainder(YEAR,4)!=0 or (YEAR>YCHANGE and remainder(YEAR,4)=0 and remainder(YEAR,100)=0 and remainder(YEAR,400)!=0) or (MONTH=2 and DAY=30)) or MONTH<1 or MONTH>12
 	Output(3,0,"ERROR:")
 	Output(4,0,"INVALID DATE")
 	Pause 
