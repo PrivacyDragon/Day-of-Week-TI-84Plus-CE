@@ -11,9 +11,6 @@ This is for most dates just fine, but if you want to know what day of week it wa
 For that reason I've made this program, where you can set the date your country switched to the Gregorian calendar manually.
 The program will then calculate the day of week for any date you give, for your country.
 
-#### How to download the program?
-You can download the program via 'releases'
-
 #### How to send the program to your calculator?
 You can easily send the program to your calculator using TiLP or TI-connect CE.
 Once you've sent it to your calculator there are two possible options to run the program, for the ICE version:<br>
