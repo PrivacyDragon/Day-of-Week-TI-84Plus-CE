@@ -359,7 +359,7 @@ Then
 	Pause 
 	Goto S
 End
-If ((M=4 or M=6 or M=9 or M=11) and D=31) or (D=29 and M=2 and (remainder(Y,4)!=0 or (remainder(Y,4)=0 and remainder(Y,100)=0 and remainder(Y,400)!=0)) or Y=0 or (M=2 and (D=30 or D=31)))
+If ((M=4 or M=6 or M=9 or M=11) and D=31) or (D=29 and M=2 and remainder(Y,4)!=0) or (M=2 and D=30)
 Then
 	Disp "ERROR:"
 	Disp "INVALID DATE"
