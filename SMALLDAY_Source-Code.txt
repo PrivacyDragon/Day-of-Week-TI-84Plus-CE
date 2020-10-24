@@ -1,0 +1,202 @@
+"(C)Privacy_Dragon"
+"Version 0.0.1 (beta)"
+4->dim(|LWEEK)
+If |LWEEK(1)<=0
+Then
+	ClrHome
+	Output(2,1,"WHAT YEAR DID THE CALENDAR CHANGE?")
+	Input G
+	G->|LWEEK(1)
+	ClrHome
+	Output(2,1,"WHAT MONTH DID THE CALENDAR CHANGE?")
+	Input I
+	I->|LWEEK(2)
+	ClrHome
+	Output(2,1,"WHAT DAY DID THE CALENDAR CHANGE?")
+	Input P
+	P->|LWEEK(3)
+	ClrHome
+	Output(2,1,"Type 1,(YMD), 2,(MDY) or 3,(DMY)")
+	Input X
+	X->|LWEEK(4)
+End
+Lbl ST
+|LWEEK(1)->G
+|LWEEK(2)->I
+|LWEEK(3)->P
+|LWEEK(4)->X
+If X=1
+Goto YE
+If X=2
+Goto MO
+If X=3
+Goto DA
+
+Lbl DA
+ClrHome
+Input "DAY:",D
+If X=1
+Goto FO
+If X=2
+Goto YE
+If X=3
+Goto MO
+
+Lbl MO
+ClrHome
+Input "MONTH:",M
+If X=1 or X=2
+Goto DA
+If X=3
+Goto YE
+
+Lbl YE
+ClrHome
+Input "YEAR:",Y
+If X=1
+Goto MO
+If X=2 or YMD=3
+Goto FO
+
+Lbl FO
+(G/100)-(G/400)-2+1->Q
+If I=1 or I=3 or I=5 or I=7 or I=8 or I=10 or I=12
+Then
+	32->A
+	31->B
+End
+If I=4 or I=6 or I=9 or I=11
+Then
+	31->A
+	30->B
+End
+If remainder(G,4)!=0 and I=2
+Then
+	29->A
+	28->B
+End
+If Y=G and M=I and D>P and P+Q<A
+Then
+	If D>P and D<P+Q
+	Then
+		Output(3,1,"ERROR:")
+		Output(4,1,"NONEXISTANT DATE DUE TO"
+		Output(5,1,"CALENDAR CHANGE")
+		Pause 
+		Goto ST
+	End
+End
+If P+Q>B
+Then
+	I+1->R
+	P+Q-B->S
+	If I=12
+	Then
+		I-11->R
+		G+1->V
+	End
+	If (Y=G and M=R and D<S) or (Y=G and M=I and D>P) or (Y=V and M=R and D<S)
+	Then
+		Output(3,1,"ERROR:")
+		Output(4,1,"NONEXISTANT DATE DUE TO")
+		Output(5,1,"CALENDAR CHANGE")
+		Pause 
+		Goto ST
+	End
+End
+If G=1700 and I=2 and P=18
+Then
+	If Y=1700 and M=2 and D>18
+	Then
+		Output(3,1,"ERROR:")
+		Output(4,1,"NONEXISTANT DATE DUE TO"
+		Output(5,1,"CALENDAR CHANGE")
+		Pause 
+		Goto ST
+	End
+End
+
+If (D=31 and (M=4 or M=6 or M=9 or M=11)) or (D=29 and M=2 and (remainder(Y,4)!=0 or (remainder(Y,4)=0 and remainder(Y,100)=0 and remainder(Y,400)!=0)) or (M=2 and D=30)) or (Y=0) or (M<1 or M>31) or (D<1 or D>31)
+Then
+	Output(3,1,"ERROR:")
+	Output(4,1,"INVALID DATE")
+	Pause 
+	Goto ST
+End
+Y->U
+M->O
+If M=1 or M=2
+Then
+	M+12->M
+	Y-1->Y
+End
+
+If U>G or U=G and O>I
+remainder(int((13*(M+1))/5)+D+Y+int(Y/4)-int(Y/100)+int(Y/400),7)->W
+
+If U=G and O=I
+Then
+	If D>P
+	remainder(int((13*(M+1))/5)+D+Y+int(Y/4)-int(Y/100)+int(Y/400),7)->W
+	If D<P or D=P
+	remainder(int((13*(M+1))/5)+D+Y+int(Y/4)+5,7)->W
+End
+
+If U<G
+remainder(int((13*(M+1))/5)+D+Y+int(Y/4)+5,7)->W
+ClrHome
+If W=0
+"SATURDAY"->Str9
+If W=1
+"SUNDAY"->Str9
+If W=2
+"MONDAY"->Str9
+If W=3
+"TUESDAY"->Str9
+If W=4
+"WEDNESDAY"->Str9
+If W=5
+"THURSDAY"->Str9
+If W=6
+"FRIDAY"->Str9
+If X=1
+Then
+	Output(2,7,U)
+	Output(2,13,O)
+	Output(2,16,D)
+End
+If X=2
+Then
+	Output(2,8,O)
+	Output(2,11,D)
+	Output(2,14,U)
+End
+If X=3
+Then
+	Output(2,8,D)
+	Output(2,11,O)
+	Output(2,14,U)
+End
+getDate->|LDATE
+List>matr(|LDATE,[D])
+If [D](1,1)<Y
+Then
+	Output(4,8,"WILL BE ON A:")
+	Output(9,1,"IF THERE ARE STILL PEOPLE")
+	Output(10,1,"IN THAT YEAR...")
+	Output(5,9,Str9)
+	Pause 
+End
+If [D](1,1)>Y
+Then
+	Output(4,8,"WAS ON A:")
+	Output(5,9,Str9)
+	Pause 
+End
+If [D](1,1)=Y
+Then
+	Output(4,8,"IS ON A:")
+	Output(5,9,Str9)
+	Pause 
+End
+ClrHome
