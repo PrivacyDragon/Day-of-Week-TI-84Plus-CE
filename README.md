@@ -1,7 +1,9 @@
 # Day-of-Week-TI-84Plus-CE
 
+## WARNING: THIS IS A BETA VERSION, SO IT IS STILL BEING TESTED!
+
 ### This is a day of week calculate tool for the TI-84+ CE.
-### There are two versions, one of them is written in TI-BASIC and therefore also compatible with newer OS versions, the other is written in ICE.
+### There are three versions, one of them is written in TI-BASIC and therefore also compatible with newer OS versions, the other is written in ICE and the last one is a resized or 'lite' version of the TI-BASIC version.
 
 #### why is this different from the standard DayofWk( command?
 The standard DayofWk( command calculates all dates using the formula for the Gregorian calendar.
@@ -17,17 +19,23 @@ You can easily send the program to your calculator using TiLP or TI-connect CE.
 Once you've sent it to your calculator there are two possible options to run the program, for the ICE version:<br>
 -If the OS of your calculator is 5.5 or higher, then you should run the program via Cesium, or use asmhook.<br>
 -If the OS of your calculator is 5.4 or below, you can just run the program via the [prgm] menu.<br>
-For the TI-BASIC version:<br>
+For the TI-BASIC versions:<br>
 -Just run the program via the [prgm] menu<br>
 
 #### How do I use this program?
+###### For the default versions:<br>
 Once you open the program you can press:<br>
 -[2nd] to go to the settings<br>
 -[enter] to calculate the day of week<br>
 -[clear] to exit<br>
--[mode] to see what version you have
+-[mode] to see what version you have<br>
+###### For the 'lite' version:<br>
+The first time you open the program you'll have to enter when the calendar changed for your country and what date format you want to use.<br>
+Then you will be asked the date you want to calculate and it's displayed.<br>
+The next time you open the program you can directly input the date.
 
-###### What are the settings?
+
+#### What are the settings?
 There are two different settings:<br>
 -On what date your country switched to the Gregorian calendar<br>
 -If you want the dates in YYYY-MM-DD, MM-DD-YYYY or DD-MM-YYYY<br>
@@ -37,7 +45,7 @@ Once you press [enter] in the first screen, you'll be asked the year, month and 
 The default setting is that you see the notation: YYYY/MM/DD.
 
 #### Will the program be 100% correct?
-Well, it is very difficult to say if it is correct, but as far as I've tested, all dates were correct, and I did test it thoroughly.
+Well, it is very difficult to say if it is correct, but as far as I've tested, all dates were correct.
 
 #### How does the program calculate the day of the week?
 This program makes use of the Zellers Congruence to calculate the day of the week.
