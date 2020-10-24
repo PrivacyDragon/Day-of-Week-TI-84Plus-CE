@@ -73,8 +73,8 @@ Repeat S=34 or S=105 or S=22 or S=25
 		ClrHome
 		Output(1,3,"VERSION INFORMATION")
 		Output(2,1,"--------------------------")
-		Output(3,1,"You have version: 1.2.1B")
-		Output(4,1,"released: 22 October 2020")
+		Output(3,1,"You have version: 1.2.2Bbeta")
+		Output(4,1,"released: --")
 		getDate->|LDATE
 		List>matr(|LDATE,[D])
 		If [H](2,3)>=2022
