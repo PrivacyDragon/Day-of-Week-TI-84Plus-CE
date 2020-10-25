@@ -1,5 +1,5 @@
 "(C)Privacy_Dragon"
-"Version 0.0.1 (beta)"
+"Version 0.0.2 (beta)"
 4->dim(|LWEEK)
 If |LWEEK(1)<=0
 Then
@@ -115,14 +115,6 @@ Then
 		Goto ST
 	End
 End
-
-If (D=31 and (M=4 or M=6 or M=9 or M=11)) or (D=29 and M=2 and (remainder(Y,4)!=0 or (remainder(Y,4)=0 and remainder(Y,100)=0 and remainder(Y,400)!=0)) or (M=2 and D=30)) or (Y=0) or (M<1 or M>31) or (D<1 or D>31)
-Then
-	Output(3,1,"ERROR:")
-	Output(4,1,"INVALID DATE")
-	Pause 
-	Goto ST
-End
 Y->U
 M->O
 If M=1 or M=2
@@ -130,34 +122,28 @@ Then
 	M+12->M
 	Y-1->Y
 End
-
-If U>G or U=G and O>I
-remainder(int((13*(M+1))/5)+D+Y+int(Y/4)-int(Y/100)+int(Y/400),7)->W
-
-If U=G and O=I
+dayOfWk(Y,M,D)->A
+If Y<G or (Y=G and M=I and (D<=P))
 Then
-	If D>P
-	remainder(int((13*(M+1))/5)+D+Y+int(Y/4)-int(Y/100)+int(Y/400),7)->W
-	If D<P or D=P
-	remainder(int((13*(M+1))/5)+D+Y+int(Y/4)+5,7)->W
+	Q+A-10->W
+Else
+	A->W
 End
 
-If U<G
-remainder(int((13*(M+1))/5)+D+Y+int(Y/4)+5,7)->W
 ClrHome
-If W=0
-"SATURDAY"->Str9
-If W=1
-"SUNDAY"->Str9
-If W=2
-"MONDAY"->Str9
-If W=3
-"TUESDAY"->Str9
-If W=4
-"WEDNESDAY"->Str9
 If W=5
-"THURSDAY"->Str9
+"SATURDAY"->Str9
 If W=6
+"SUNDAY"->Str9
+If W=0
+"MONDAY"->Str9
+If W=1
+"TUESDAY"->Str9
+If W=2
+"WEDNESDAY"->Str9
+If W=3
+"THURSDAY"->Str9
+If W=4
 "FRIDAY"->Str9
 If X=1
 Then
