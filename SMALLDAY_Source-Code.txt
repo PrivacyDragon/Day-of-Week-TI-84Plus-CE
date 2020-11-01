@@ -1,5 +1,5 @@
 "(C)Privacy_Dragon"
-"Version 0.0.2 (beta)"
+"Version 0.0.4 (beta)"
 4->dim(|LWEEK)
 If |LWEEK(1)<=0
 Then
@@ -59,7 +59,14 @@ If X=2 or YMD=3
 Goto FO
 
 Lbl FO
-(G/100)-(G/400)-2+1->Q
+If D>31 or D<1 or M>12 or M<1 or Y<1 or (M=2 and remainder(Y,4)!=0 and D>28)
+Then
+	Output(3,1,"ERROR:")
+	Output(4,1,"INVALID DATE")
+	Pause 
+	Goto ST
+End
+int(G/100)-int(G/400)-2+1->Q
 If I=1 or I=3 or I=5 or I=7 or I=8 or I=10 or I=12
 Then
 	32->A
@@ -104,85 +111,63 @@ Then
 		Goto ST
 	End
 End
-If G=1700 and I=2 and P=18
-Then
-	If Y=1700 and M=2 and D>18
-	Then
-		Output(3,1,"ERROR:")
-		Output(4,1,"NONEXISTANT DATE DUE TO"
-		Output(5,1,"CALENDAR CHANGE")
-		Pause 
-		Goto ST
-	End
-End
-Y->U
-M->O
-If M=1 or M=2
-Then
-	M+12->M
-	Y-1->Y
-End
+int(Y/100)-int(Y/400)-2+1->Q
 dayOfWk(Y,M,D)->A
-If Y<G or (Y=G and M=I and (D<=P))
+If Y<G or (Y=G and M=I and D<=P) or (Y=G and M<I)
 Then
-	Q+A-10->W
+	If Q<0 or Q>0
+	Then
+		If M=1 or M=2
+		Then
+			M+12->M
+			Y-1->Y
+		End
+		int((13*(M+1))/5)->A
+		D+A+Y->B
+		int(Y/4)->C
+		B+C+5->F
+		remainder(F,7)->W
+	End
+	If Q=0
+	A-8->W
 Else
-	A->W
+	A-8->W
 End
 
 ClrHome
-If W=5
+If W=6 or W=~7
 "SATURDAY"->Str9
-If W=6
+If W=0 or W=~1
 "SUNDAY"->Str9
-If W=0
+If W=1 or W=~2
 "MONDAY"->Str9
-If W=1
+If W=2 or W=~3
 "TUESDAY"->Str9
-If W=2
+If W=3 or W=~4
 "WEDNESDAY"->Str9
-If W=3
+If W=4 or W=~5
 "THURSDAY"->Str9
-If W=4
+If W=5 or W=~6
 "FRIDAY"->Str9
 If X=1
 Then
-	Output(2,7,U)
-	Output(2,13,O)
+	Output(2,7,Y)
+	Output(2,13,M)
 	Output(2,16,D)
 End
 If X=2
 Then
-	Output(2,8,O)
+	Output(2,8,M)
 	Output(2,11,D)
-	Output(2,14,U)
+	Output(2,14,Y)
 End
 If X=3
 Then
 	Output(2,8,D)
-	Output(2,11,O)
-	Output(2,14,U)
+	Output(2,11,M)
+	Output(2,14,Y)
 End
-getDate->|LDATE
-List>matr(|LDATE,[D])
-If [D](1,1)<Y
-Then
-	Output(4,8,"WILL BE ON A:")
-	Output(9,1,"IF THERE ARE STILL PEOPLE")
-	Output(10,1,"IN THAT YEAR...")
-	Output(5,9,Str9)
-	Pause 
-End
-If [D](1,1)>Y
-Then
-	Output(4,8,"WAS ON A:")
-	Output(5,9,Str9)
-	Pause 
-End
-If [D](1,1)=Y
-Then
-	Output(4,8,"IS ON A:")
-	Output(5,9,Str9)
-	Pause 
-End
+Output(4,6,"WAS/WILL BE ON A:")
+Output(5,9,Str9)
+Pause 
 ClrHome
