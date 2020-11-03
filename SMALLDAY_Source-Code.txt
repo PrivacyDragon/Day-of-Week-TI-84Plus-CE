@@ -1,5 +1,5 @@
 "(C)Privacy_Dragon"
-"Version 0.0.5 (beta)"
+"Version 1.0.0"
 4->dim(|LWEEK)
 If |LWEEK(1)<=0
 Then
@@ -59,7 +59,7 @@ If X=2 or YMD=3
 Goto FO
 
 Lbl FO
-If D>31 or D<1 or M>12 or M<1 or Y<1 or (M=2 and remainder(Y,4)!=0 and D>28)
+If (D>31 or D<1) or (M>12 or M<1) or Y<1 or (M=2 and remainder(Y,4)!=0 and D>28) or (M=2 and remainder(Y,4)=0 and D>29) or ((M=4 or M=6 or M=9 or M=11) and D>30)
 Then
 	Output(3,1,"ERROR:")
 	Output(4,1,"INVALID DATE")
@@ -166,11 +166,10 @@ Then
 	Output(9,1,"IF THERE ARE STILL PEOPLE")
 	Output(10,1,"IN THAT YEAR...")
 	Output(5,9,Str9)
-	Pause 
-	Goto ST
 Else
 	Output(4,8,"WAS ON A:")
 	Output(5,9,Str9)
-	Pause 
-	Goto ST
 End
+Pause 
+ClrHome
+Stop
