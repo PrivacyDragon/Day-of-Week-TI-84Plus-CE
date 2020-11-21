@@ -1,7 +1,5 @@
 # Day-of-Week-TI-84Plus-CE
 
-## WARNING: THIS IS A BETA VERSION, SO IT IS STILL BEING TESTED!
-
 ### This is a day of week calculate tool for the TI-84+ CE.
 ### There are three versions, one of them is written in TI-BASIC and therefore also compatible with newer OS versions, the other is written in ICE and the last one is a resized or 'lite' version of the TI-BASIC version.
 
