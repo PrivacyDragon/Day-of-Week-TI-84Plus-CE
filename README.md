@@ -1,7 +1,7 @@
 # Day-of-Week-TI-84Plus-CE
 
 ### This is a day of week calculate tool for the TI-84+ CE.
-### There are two versions, one of them is written in TI-BASIC and therefore also compatible with newer OS versions, the other is written in ICE.
+### There are three versions, two of them are written in TI-BASIC and therefore also compatible with newer OS versions, the other is written in ICE.
 
 #### why is this different from the standard DayofWk( command?
 The standard DayofWk( command calculates all dates using the formula for the Gregorian calendar.
